@@ -1,2 +1,46 @@
-<button (click)="getTrialData()">Get Trials</button>
-<p>Found {{numTrials}} trials!</p>
+<mat-grid-list cols="4" rowHeight="4:2">
+    <mat-grid-tile>
+        <!-- Not implemented yet -->
+        <mat-form-field appearance="fill" *ngIf="statusesList">
+            <mat-label>Condition</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let status of statusesList" [value]="status">
+                    {{status}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    
+    <mat-grid-tile>
+        <mat-form-field appearance="fill" *ngIf="statusesList">
+            <mat-label>Status</mat-label>
+            <mat-select [(value)]="statusFilter">
+                <mat-option *ngFor="let status of statusesList" [value]="status">
+                    {{status}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-form-field appearance="fill">
+            <mat-label>Primary Completition Date Between</mat-label>
+            <mat-date-range-input [formGroup]="completitionDate" [rangePicker]="picker">
+                <input matStartDate formControlName="primaryCompletionDateFrom" placeholder="Start date">
+                <input matEndDate formControlName="primaryCompletionDateUntil" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <div class="search-area">
+            <button mat-raised-button color="primary" class="search" (click)="getTrialData()">Get Trials</button>
+            <p>
+                Found {{numTrials}} trials!
+            </p>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
