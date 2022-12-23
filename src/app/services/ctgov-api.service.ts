@@ -34,6 +34,7 @@ export class CtgovApiService {
     let params = new HttpParams()
     .set('expr', queryExpression)
     .set('fields', 'NCTId,Condition,BriefTitle,OverallStatus,PrimaryCompletionDate')
+    .set('fmt', 'JSON');
 
     this.http.get<CTGovResponse>(baseUrl, {params})
     .subscribe(trials => {
